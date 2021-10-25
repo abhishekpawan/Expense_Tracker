@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState} from "react";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 import "./ExpenseForm.css";
 
@@ -7,6 +8,8 @@ const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  
+  const [isValid, setIsValidTitle] = useState(true);
 
   // using single usestates
   // const [userInput, setUserInput]=useState({
@@ -23,6 +26,7 @@ const ExpenseForm = (props) => {
 
   const titleChangeHandler = (e) => {
     setEnteredTitle(e.target.value);
+    setIsValidTitle(true);
     // setUserInput({
     //     ...userInput,
     //     enteredTitle: e.target.value,
@@ -30,6 +34,7 @@ const ExpenseForm = (props) => {
   };
   const amountChangeHandler = (e) => {
     setEnteredAmount(e.target.value);
+    setIsValidTitle(true);
     // setUserInput({
     //     ...userInput,
     //     enteredAmount: e.target.value,
@@ -37,6 +42,7 @@ const ExpenseForm = (props) => {
   };
   const dateChangeHandler = (e) => {
     setEnteredDate(e.target.value);
+    setIsValidTitle(true);
     // setUserInput({
     //     ...userInput,
     //     enteredDate: e.target.value,
@@ -48,11 +54,11 @@ const ExpenseForm = (props) => {
     e.preventDefault();
 
     if (
-      enteredTitle.length === 0 ||
-      enteredAmount.length === 0 ||
+      enteredTitle.trim().length === 0 ||
+      enteredAmount.trim().length === 0 ||
       enteredDate.length === 0
     ) {
-      alert("Please Enter All fields");
+      setIsValidTitle(false);
     } else {
       const expenseData = {
         title: enteredTitle,
@@ -71,12 +77,12 @@ const ExpenseForm = (props) => {
     }
   };
 
-  const cancelHandler=()=>{
-
+  const cancelHandler = () => {
     setEnteredTitle("");
-      setEnteredAmount("");
-      setEnteredDate("");
-  }
+    setEnteredAmount("");
+    setEnteredDate("");
+    setIsValidTitle(true);
+  };
 
   return (
     <div>
@@ -84,9 +90,20 @@ const ExpenseForm = (props) => {
         <div className="modal-dialog">
           <div className="modal-content">
             <form onSubmit={submitHandler}>
+              <div
+                className={`alert bg-warning warning ${
+                  !isValid ? "" : "d-none"
+                }`}
+              >
+                <h3 className="warning-icon">
+                  <FaExclamationTriangle />
+                </h3>
+                <h3> Please Fill All The Fields!!!</h3>
+              </div>
               <div className="new-expense__controls">
                 <div className="col-7 new-expense__control">
                   <label>Title</label>
+
                   <input
                     type="text"
                     value={enteredTitle}
@@ -95,7 +112,7 @@ const ExpenseForm = (props) => {
                   />
                 </div>
                 <div className="col-5 new-expense__control">
-                  <label>Amount</label>
+                  <label>Amount (in ₹)</label>
                   <input
                     type="number"
                     min="0.01"
@@ -107,6 +124,7 @@ const ExpenseForm = (props) => {
                 </div>
                 <div className="col-6 new-expense__control">
                   <label>Date</label>
+
                   <input
                     type="date"
                     min="2019-01-01"
@@ -117,14 +135,23 @@ const ExpenseForm = (props) => {
                   />
                 </div>
                 <div className="modal-footer col-12 mt-4 button">
-                  <button type="button" data-bs-dismiss="modal" onClick={cancelHandler}>Cancel</button>
-                  <button className="add-expense" type="submit">Add Expense</button>
+                  <button
+                    type="button"
+                    data-bs-dismiss="modal"
+                    onClick={cancelHandler}
+                  >
+                    Cancel
+                  </button>
+                  <button className="add-expense" type="submit">
+                    Add Expense
+                  </button>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
+     
       <div className="new-expense__actions">
         <button
           type="button"
@@ -133,6 +160,7 @@ const ExpenseForm = (props) => {
         >
           Add Expense
         </button>
+        
       </div>
     </div>
   );

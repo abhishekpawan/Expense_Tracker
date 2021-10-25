@@ -1,4 +1,5 @@
 import ExpenseForm from './ExpenseForm'
+import IncomeForm from './IncomeForm'
 import './NewExpenses.css'
 
 const NewExpenses = (props) => {
@@ -13,9 +14,18 @@ const NewExpenses = (props) => {
         props.onAddExpense(expenseData);
     };
 
+    //passing the enetered income from child to parent 
+
+    const incomeDataHandler = (enteredIncome)=>{
+        const incomeData = enteredIncome
+
+        props.onIncomeData(incomeData);
+    }
+
     return (
         <div className="new-expense">
             <ExpenseForm onSaveExpenseData={saveExpenseDataHandler}/>
+            <IncomeForm onIncomeData={incomeDataHandler}/>
         </div>
     )
 }

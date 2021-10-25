@@ -1,60 +1,48 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { FaEdit } from "react-icons/fa";
 import "./EditExpense.css";
 // import ExpenseItem from './ExpenseItem'
 
 const EditExpense = (props) => {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
-
+  const title = useRef();
+  const amount = useRef();
+  const date = useRef();
 
   //sending edit expense id
   const editHandler = () => {
     props.onEdit(props.data.id);
   };
 
+  var oldTitle = props.editExpenseData[0].title;
+  var oldAmount = props.editExpenseData[0].amount;
 
-  const titleHandler = (e) => {
-    setTitle(e.target.value);
-  };
-  const amountHandler = (e) => {
-    setAmount(e.target.value);
-  };
-  const dateHandler = (e) => {
-    setDate(e.target.value);
-  };
+  function convertDate(inputFormat) {
+    function pad(s) {
+      return s < 10 ? "0" + s : s;
+    }
+    var d = new Date(inputFormat);
+    return [d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())].join("-");
+  }
+
+  var oldDate = convertDate(props.editExpenseData[0].date);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(title.length === 0 ||
-      amount.length === 0 ||
-      date.length === 0){
-      alert("Please Make Some Change")
-      }
+    const editedExpenseData = {
+      title: title.current.value,
+      amount: parseInt(amount.current.value),
+      date: new Date(date.current.value),
+      id: props.editExpenseId,
+    };
 
-      else{
-
-        const editedExpenseData = {
-          title: title,
-          amount: parseInt(amount),
-          date: new Date(date),
-          id: props.editExpenseId,
-        };
-        // console.log(editedExpenseData)
-        //sending edited expense data
-        props.onSaveEditedExpenseData(editedExpenseData);
-        setTitle("");
-        setAmount("");
-        setDate("");
-      }
-    
+    //sending edited expense data
+    props.onSaveEditedExpenseData(editedExpenseData);
   };
   const cancelHandler = () => {
-    setTitle("");
-    setAmount("");
-    setDate("");
+    title.current.value = "";
+    amount.current.value = "";
+    date.current.value = "";
   };
 
   return (
@@ -75,38 +63,41 @@ const EditExpense = (props) => {
       <div className="modal fade" id="edit-form">
         <div className="modal-dialog">
           <div className="modal-content">
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} key={props.editExpenseId}>
               <div className="new-expense__controls">
                 <div className="col-7 new-expense__control">
                   <label>Title</label>
                   <input
                     type="text"
-                    value={title}
+                    required
                     placeholder="Enter Title"
-                    onChange={titleHandler}
+                    ref={title}
+                    Value={oldTitle}
                   ></input>
                 </div>
                 <div className="col-5 new-expense__control">
                   <label>Amount</label>
                   <input
                     type="number"
+                    required
                     min="0.01"
                     step="0.01"
-                    value={amount}
+                    ref={amount}
+                    Value={oldAmount}
                     placeholder="Enter Amount"
-                    onChange={amountHandler}
                   />
                 </div>
                 <div className="col-6 new-expense__control">
                   <label>Date</label>
                   <input
                     type="date"
+                    required
                     min="2019-01-01"
                     max="2022-12-31"
-                    value={date}
+                    ref={date}
+                    Value={oldDate}
                     // Value={props.editExpenseData[0].date}
                     placeholder="Enter Date"
-                    onChange={dateHandler}
                   />
                 </div>
                 <div className="modal-footer col-12 mt-4 button">

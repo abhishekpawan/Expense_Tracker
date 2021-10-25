@@ -5,10 +5,16 @@ import NewExpenses from "./components/NewExpense/NewExpenses";
 const App = () => {
   const [expenses, setExpenses] = useState([
     {
+      id: "e0",
+      title: "Toilet Paper",
+      amount: 94.12,
+      date: new Date(2021, 0, 14),
+    },
+    {
       id: "e1",
       title: "Toilet Paper",
       amount: 94.12,
-      date: new Date(2020, 7, 14),
+      date: new Date(2021, 1, 14),
     },
     {
       id: "e2",
@@ -20,13 +26,55 @@ const App = () => {
       id: "e3",
       title: "Car Insurance",
       amount: 294.67,
-      date: new Date(2021, 2, 28),
+      date: new Date(2021, 3, 28),
     },
     {
       id: "e4",
-      title: "New Desk (Wooden)",
+      title: "New Desk1 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 4, 12),
+    },
+    {
+      id: "e5",
+      title: "New Desk2 (Wooden)",
       amount: 450,
       date: new Date(2021, 5, 12),
+    },
+    {
+      id: "e6",
+      title: "New Desk3 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 6, 12),
+    },
+    {
+      id: "e7",
+      title: "New Desk4 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 7, 12),
+    },
+    {
+      id: "e8",
+      title: "New Desk5 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 8, 12),
+    },
+    {
+      id: "e9",
+      title: "New Desk6 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 9, 12),
+    },
+    {
+      id: "e10",
+      title: "New Desk7 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 10, 12),
+    },
+    {
+      id: "e11",
+      title: "New Desk8 (Wooden)",
+      amount: 450,
+      date: new Date(2021, 11, 12),
     },
   ]);
 
@@ -37,24 +85,31 @@ const App = () => {
     });
   };
 
-  
+  //geeting the entered income and paasing to Expense.Js
+  const [income, setIncome] = useState('00')
+  const incomeDataHandler = (income) =>{
+    setIncome((prevIncome)=>{
+      return [parseFloat(income)+parseFloat(prevIncome)]
+    })
+  }
+
   //delete expense
   const deleteExpense = (expenseId) => {
     setExpenses(expenses.filter((expense) => expense.id !== expenseId));
   };
   
   //sending the data of sected expense to edit
-  // const [editedExpenseData, setEditedExpenseData] = useState([{
+  const [editedExpenseData, setEditedExpenseData] = useState([{
 
-  // }
+  }
 
-  // ]);
+  ]);
 
   //sending back the id of selected expense
   const [editedExpenseId, setEditExpenseId] = useState();
   const editExpenseId = (expenseId) => {
     setEditExpenseId(expenseId);
-    // setEditedExpenseData(expenses.filter((expense)=>expense.id === expenseId))
+    setEditedExpenseData(expenses.filter((expense)=>expense.id === expenseId))
   };
 
 
@@ -77,18 +132,20 @@ const App = () => {
       return [editedExpense, ...prevExpenses];
     });
   };
+  
 
 
   return (
     <div>
-      <NewExpenses onAddExpense={addExpenseHandler} />
+      <NewExpenses onAddExpense={addExpenseHandler} onIncomeData={incomeDataHandler} />
       <Expenses
         items={expenses}
         onDelete={deleteExpense}
         onEdit={editExpenseId}
         editExpenseId={editedExpenseId}
-        // editExpenseData={editedExpenseData}
+        editExpenseData={editedExpenseData}
         onSaveEditedExpenseData={saveEditedExpenseDataHandler}
+        enteredIncome={income}
       />
     </div>
   );

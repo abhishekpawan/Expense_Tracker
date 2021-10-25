@@ -42,3 +42,19 @@
   .modal-footer{
     padding-right: 0px;
   }
+
+  .warning{ 
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 5px;
+    padding-left: 20px;
+    margin: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
+
+  }
+
+  .warning-icon{
+    color:red;
+    padding-bottom: 2px;
+  }
