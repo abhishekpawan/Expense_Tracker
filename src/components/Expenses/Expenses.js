@@ -9,28 +9,30 @@ import Balance from "./Balance";
 import "./Expenses.css";
 
 const Expenses = (props) => {
+
+  var today = new Date();
+
+  const getCurrentYear = today.getFullYear(); 
+  
   //filtering expenses according to year
-  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredYear, setFilteredYear] = useState(getCurrentYear);
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
 
   const filteredExpenses = props.items.filter((expense) => {
+
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
   const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
   ];
-  var today = new Date();
   var month=monthNames[today.getMonth()]
-  console.log(month)
 
   //filtering expenses according to Month
   const [filteredMonth, setFilteredMonth] = useState(month);
-
-  
 
   const filterMonthChangeHandler = (selectedMonth) => {
     setFilteredMonth(selectedMonth);
@@ -40,6 +42,12 @@ const Expenses = (props) => {
     return expense.date.toLocaleString('en-US', {month:'long'}) === filteredMonth;
   });
 
+   //filtering income according to year
+   let filterIncome = '00';
+   if(props.enteredIncome[2]===filteredYear ){
+     filterIncome= props.enteredIncome[0];
+   }
+ 
 
   //delete expense
   const deleteExpenseId = (expenseId) => {
@@ -75,6 +83,11 @@ const Expenses = (props) => {
     ));
   }
 
+  //sending income amount data to balance.js
+  const expenseAmount = filteredExpensesByMonth.map((amount)=>{
+    return amount.amount;
+  })
+
   return (
     <div className="expenses">
       <ExpensesFilterByYear
@@ -85,7 +98,10 @@ const Expenses = (props) => {
         selected={filteredMonth}
         onChangeFilter={filterMonthChangeHandler}
       />
-      <Balance enteredIncome={props.enteredIncome}/>
+      <Balance 
+        enteredIncome={filterIncome}
+        expenseAmount={expenseAmount}
+        />
       
       <ExpensesChart expenses={filteredExpenses} />
       {expenseContent}

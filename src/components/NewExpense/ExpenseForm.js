@@ -81,7 +81,7 @@ const ExpenseForm = (props) => {
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
-    setIsValidTitle(true);
+    // setIsValidTitle(true);
   };
 
   return (
@@ -90,7 +90,7 @@ const ExpenseForm = (props) => {
         <div className="modal-dialog">
           <div className="modal-content">
             <form onSubmit={submitHandler}>
-              <div
+              {/* <div
                 className={`alert bg-warning warning ${
                   !isValid ? "" : "d-none"
                 }`}
@@ -99,12 +99,13 @@ const ExpenseForm = (props) => {
                   <FaExclamationTriangle />
                 </h3>
                 <h3> Please Fill All The Fields!!!</h3>
-              </div>
+              </div> */}
               <div className="new-expense__controls">
                 <div className="col-7 new-expense__control">
                   <label>Title</label>
 
                   <input
+                    required
                     type="text"
                     value={enteredTitle}
                     placeholder="Enter Title"
@@ -114,6 +115,7 @@ const ExpenseForm = (props) => {
                 <div className="col-5 new-expense__control">
                   <label>Amount (in ₹)</label>
                   <input
+                    required
                     type="number"
                     min="0.01"
                     step="0.01"
@@ -126,6 +128,7 @@ const ExpenseForm = (props) => {
                   <label>Date</label>
 
                   <input
+                    required
                     type="date"
                     min="2019-01-01"
                     max="2022-12-31"

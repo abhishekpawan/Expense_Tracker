@@ -85,13 +85,22 @@ const App = () => {
     });
   };
 
-  //geeting the entered income and paasing to Expense.Js
+  //geeting the entered income 
   const [income, setIncome] = useState('00')
+  
   const incomeDataHandler = (income) =>{
     setIncome((prevIncome)=>{
       return [parseFloat(income)+parseFloat(prevIncome)]
     })
   }
+
+   //getting curent date to attach with incomeDATA(object)  
+   const current = new Date();
+   const month = current.getMonth()+1;
+   const year = current.getFullYear();
+
+   var incomeData = [income,month,year]
+   
 
   //delete expense
   const deleteExpense = (expenseId) => {
@@ -137,7 +146,10 @@ const App = () => {
 
   return (
     <div>
-      <NewExpenses onAddExpense={addExpenseHandler} onIncomeData={incomeDataHandler} />
+      <NewExpenses 
+        onAddExpense={addExpenseHandler} 
+        onIncomeData={incomeDataHandler} 
+        />
       <Expenses
         items={expenses}
         onDelete={deleteExpense}
@@ -145,7 +157,7 @@ const App = () => {
         editExpenseId={editedExpenseId}
         editExpenseData={editedExpenseData}
         onSaveEditedExpenseData={saveEditedExpenseDataHandler}
-        enteredIncome={income}
+        enteredIncome={incomeData}
       />
     </div>
   );
