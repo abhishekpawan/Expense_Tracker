@@ -1,82 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { expenseData } from "../App";
 import Expenses from "./Expenses/Expenses";
 import NewExpenses from "./NewExpense/NewExpenses";
+import { BiLoader } from "react-icons/bi";
+
 
 const Home = () => {
-  const [expenses, setExpenses] = useState([
-    {
-      id: "e0",
-      title: "Toilet Paper",
-      amount: 94.12,
-      date: new Date(2021, 0, 14),
-    },
-    {
-      id: "e1",
-      title: "Toilet Paper",
-      amount: 94.12,
-      date: new Date(2021, 1, 14),
-    },
-    {
-      id: "e2",
-      title: "New TV",
-      amount: 799.49,
-      date: new Date(2021, 2, 12),
-    },
-    {
-      id: "e3",
-      title: "Car Insurance",
-      amount: 294.67,
-      date: new Date(2021, 3, 28),
-    },
-    {
-      id: "e4",
-      title: "New Desk1 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 4, 12),
-    },
-    {
-      id: "e5",
-      title: "New Desk2 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 5, 12),
-    },
-    {
-      id: "e6",
-      title: "New Desk3 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 6, 12),
-    },
-    {
-      id: "e7",
-      title: "New Desk4 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 7, 12),
-    },
-    {
-      id: "e8",
-      title: "New Desk5 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 8, 12),
-    },
-    {
-      id: "e9",
-      title: "New Desk6 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 9, 12),
-    },
-    {
-      id: "e10",
-      title: "New Desk7 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 10, 12),
-    },
-    {
-      id: "e11",
-      title: "New Desk8 (Wooden)",
-      amount: 450,
-      date: new Date(2021, 11, 12),
-    },
-  ]);
+  const navigate = useNavigate();
+  const {
+    expenses,
+    setExpenses,
+    isUserLoggedIn,isSpinning, SetIsSpinning
+  } = useContext(expenseData);
+
+  console.log(expenses);
+
+  useEffect(() => {
+    if (isUserLoggedIn === false) {
+      navigate("/login");
+    }
+  }, [isUserLoggedIn]);
 
   //Adding new expense from expense form
   const addExpenseHandler = (expense) => {
@@ -139,18 +83,19 @@ const Home = () => {
   };
   return (
     <React.Fragment>
+      {isSpinning?<BiLoader/>:''}
       <NewExpenses
         onAddExpense={addExpenseHandler}
         onIncomeData={incomeDataHandler}
       />
       <Expenses
-        items={expenses}
+        // items={expenses}
         onDelete={deleteExpense}
         onEdit={editExpenseId}
         editExpenseId={editedExpenseId}
         editExpenseData={editedExpenseData}
         onSaveEditedExpenseData={saveEditedExpenseDataHandler}
-        enteredIncome={incomeData}
+        // enteredIncome={incomeData}
       />
     </React.Fragment>
   );

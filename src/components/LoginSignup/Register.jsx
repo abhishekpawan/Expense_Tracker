@@ -30,7 +30,6 @@ const Register = () => {
         return alert(data.error);
       }
       localStorage.setItem("user", JSON.stringify(data));
-      console.log(data);
     }
 
     registerUser();

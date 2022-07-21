@@ -72,7 +72,7 @@ const EditExpense = (props) => {
                     required
                     placeholder="Enter Title"
                     ref={title}
-                    Value={oldTitle}
+                    value={oldTitle}
                   ></input>
                 </div>
                 <div className="col-5 new-expense__control">
@@ -83,7 +83,7 @@ const EditExpense = (props) => {
                     min="0.01"
                     step="0.01"
                     ref={amount}
-                    Value={oldAmount}
+                    value={oldAmount}
                     placeholder="Enter Amount"
                   />
                 </div>
@@ -95,7 +95,7 @@ const EditExpense = (props) => {
                     min="2019-01-01"
                     max="2022-12-31"
                     ref={date}
-                    Value={oldDate}
+                    value={oldDate}
                     // Value={props.editExpenseData[0].date}
                     placeholder="Enter Date"
                   />

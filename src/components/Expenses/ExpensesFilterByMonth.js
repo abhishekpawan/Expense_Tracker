@@ -17,7 +17,7 @@ const dropdownChangeHandler=(e)=>{
                     <option value="April">April</option>
                     <option value="May">May</option>
                     <option value="June">June</option>
-                    <option value="July">June</option>
+                    <option value="July">July</option>
                     <option value="August">August</option>
                     <option value="September">September</option>
                     <option value="October">October</option>
