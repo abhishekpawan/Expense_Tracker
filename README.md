@@ -1,70 +1,110 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+    <img src="" alt="" width="75%">
 
-## Available Scripts
+  <h3 align="center">Expense Manager (Front-End)</h3>
 
-In the project directory, you can run:
+  <p align="center">
+    <a href="https://abhishekpawan.me/BookListApp/">Try it!</a> | <a href="https://github.com/abhishekpawan/Expense_Tracker/issues">Report Bug</a>
+  </p>
+</div>
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+</p>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+<!-- ABOUT THE PROJECT -->
+# About The Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<div align="center">
+  
+<img src="https://github.com/abhishekpawan/helping-hand/blob/main/src/img/helpinghandmockup.png" alt="helpinghandmockup" width="75%">
 
-### `npm run build`
+</div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is a Expense Manager web application, where you can track and manage you daily expenses with ease. You can eaisly login or register in the app and start manage your expenses. You can see your added expense filtered by month and year. You can also add your monthly income, and your remaining balance will be calculated accordoing to your expenses. You can also edit and delete your expenses. There is also an monthly bar chart which will keep adjusting according to your expenses of each month, through which you can compare your monthly expenses in a single glance. You will also get popup notification based on every tasks
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Basic Functionality of this project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Login/Register to the application
+- Login and Register form have complete validation
+- Adding, Deleting, Editing Expenses
+- Expenses will filter according to month and year
+- Adding, Editing incomes according to respective months
+- Showing total expense amount and the remaining balance according to respective months
 
-### `npm run eject`
+## 🏗️: Built With
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- ReactJS
+- NodeJS
+- MongoDb
+- HTML CSS JavaScript
+- Bootstrap
+- antd Design
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!-- GETTING STARTED -->
+## Getting Started
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Installing Front-end of the Project
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Clone the repo
+```
+git clone https://github.com/abhishekpawan/Expense_Tracker
+```
+### To Install all the dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm install
+```
 
-### Code Splitting
+### Start the Server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+```
+npm start
+```
+#### Runs the app in the development mode.
+#### Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### The page will reload when you make changes.  
+#### You may also see any lint errors in the console.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Installing Back-end of the Project
+*NOTE: THIS IS ONLY THE FRONT-END PART OF THE PROJECT*
 
-### Advanced Configuration
+*SEE BACK-END HERE: [Expense Manager (Back-End)](https://github.com/abhishekpawan/expense-manager-backend)*
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<!-- CONTRIBUTING -->
+## Contributing
 
-### `npm run build` fails to minify
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<!-- CONTACT -->
+## Contact
+
+##### Check my portfolio: [abhishekpawan.me](https://abhishekpawan.me) 😁
+##### LinkedIn: [Abhishek Pawan](https://linkedin.com/in/abhishekpawan)
+##### Twitter: [@non_altruistic](https://twitter.com/non_altruistic)
+##### Mail: abhishekpawan297@gmail.com
+
+### Made with my love of development ❤
+
+
