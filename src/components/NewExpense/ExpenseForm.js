@@ -1,29 +1,41 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { expenseData } from "../../App";
 
-import "./ExpenseForm.css";
 
-const ExpenseForm = (props) => {
-  const { expenses, setExpenses, user, apiCall, setApiCall } =
-    useContext(expenseData);
+const ExpenseForm = () => {
+  const {
+    setExpenses,
+    user,
+    apiCall,
+    setApiCall,
+    popupMsg,
+    notificationPopup,
+  } = useContext(expenseData);
+  const today = new Date();
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+  const [enteredDate, setEnteredDate] = useState(convertDate(today));
 
   const URL = "http://localhost:5000/api/expenses/create";
 
-  // Adding data from the form in a object
+  function convertDate(inputFormat) {
+    function pad(s) {
+      return s < 10 ? "0" + s : s;
+    }
+    var d = new Date(inputFormat);
+    return [d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())].join("-");
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     const expenseData = {
       title: enteredTitle,
-      amount: parseInt(enteredAmount),
+      amount: parseFloat(enteredAmount).toFixed(2),
       date: new Date(enteredDate),
     };
 
     async function creatingExpense() {
-      // POST request using fetch with async/await
       const requestOptions = {
         method: "POST",
         headers: {
@@ -35,37 +47,42 @@ const ExpenseForm = (props) => {
       const response = await fetch(URL, requestOptions);
       const data = await response.json();
       if (data.error) {
-        return alert(data.error);
-      }
-      setExpenses(prevExpense=>[...prevExpense, data])
+        //setting notification pop
+        popupMsg.current = data.error;
+        notificationPopup("error");
+      } else {
+        setExpenses((prevExpense) => [...prevExpense, data]);
 
-      setApiCall(apiCall + 1);
+        //setting notification pop
+        popupMsg.current = "Expense added!";
+        notificationPopup("success");
+
+        setApiCall(apiCall + 1);
+      }
     }
     creatingExpense();
 
     // Clearing the form fields after submission
     setEnteredTitle("");
     setEnteredAmount("");
-    setEnteredDate("");
+    setEnteredDate(convertDate(today));
   };
 
   const cancelHandler = () => {
     setEnteredTitle("");
     setEnteredAmount("");
-    setEnteredDate("");
+    // setEnteredDate(new Date());
     // setIsValidTitle(true);
   };
 
   return (
-    <div>
+    <React.Fragment>
       <div className="modal fade" id="expense-form">
         <div className="modal-dialog">
           <div className="modal-content">
             <form onSubmit={submitHandler}>
-              <div className="new-expense__controls">
-                <div className="col-7 new-expense__control">
-                  <label>Title</label>
-
+              <div className="new-expense__controls row">
+                <div className="col-12 new-expense__control">
                   <input
                     required
                     type="text"
@@ -76,8 +93,7 @@ const ExpenseForm = (props) => {
                     }}
                   />
                 </div>
-                <div className="col-5 new-expense__control">
-                  <label>Amount (in ₹)</label>
+                <div className="col-6 new-expense__control">
                   <input
                     required
                     type="number"
@@ -91,14 +107,12 @@ const ExpenseForm = (props) => {
                   />
                 </div>
                 <div className="col-6 new-expense__control">
-                  <label>Date</label>
-
                   <input
                     required
                     type="date"
                     min="2019-01-01"
                     max="2022-12-31"
-                    value={enteredDate}
+                    value={convertDate(enteredDate)}
                     placeholder="Enter Date"
                     onChange={(e) => {
                       setEnteredDate(e.target.value);
@@ -107,14 +121,18 @@ const ExpenseForm = (props) => {
                 </div>
                 <div className="modal-footer col-12 mt-4 button">
                   <button
+                    className="add-expense"
+                    data-bs-dismiss="modal"
+                    type="submit"
+                  >
+                    Add Expense
+                  </button>
+                  <button
                     type="button"
                     data-bs-dismiss="modal"
                     onClick={cancelHandler}
                   >
                     Cancel
-                  </button>
-                  <button className="add-expense" type="submit">
-                    Add Expense
                   </button>
                 </div>
               </div>
@@ -122,17 +140,14 @@ const ExpenseForm = (props) => {
           </div>
         </div>
       </div>
-
-      <div className="new-expense__actions">
-        <button
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#expense-form"
-        >
-          Add Expense
-        </button>
-      </div>
-    </div>
+      <button
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#expense-form"
+      >
+        Add Expense
+      </button>
+    </React.Fragment>
   );
 };
 

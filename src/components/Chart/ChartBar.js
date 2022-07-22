@@ -1,4 +1,3 @@
-import "./ChartBar.css";
 
 const ChartBar = (props) => {
 
