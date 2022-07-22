@@ -11,7 +11,7 @@ const ExpenseItem = (props) => {
   const [date, setDate] = useState(props.date);
   const [isExpenseEditable, setExpneseEditable] = useState(false);
 
-  const URL = "http://localhost:5000/api/expenses/";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/";
 
   const deleteHandler = () => {
     fetch(URL + props.id, {

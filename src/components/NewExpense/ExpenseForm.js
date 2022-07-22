@@ -16,7 +16,7 @@ const ExpenseForm = () => {
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState(convertDate(today));
 
-  const URL = "http://localhost:5000/api/expenses/create";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/create";
 
   function convertDate(inputFormat) {
     function pad(s) {

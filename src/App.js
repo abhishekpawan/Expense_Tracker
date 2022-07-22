@@ -28,8 +28,8 @@ const App = () => {
     }
   }, [isUserLoggedIn]);
 
-  const URL = "http://localhost:5000/api/expenses/all";
-  const INCOME_URL = "http://localhost:5000/api/incomes/all";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/all";
+  const INCOME_URL = "https://ink-cottony-licorice.glitch.me/api/incomes/all";
 
   var today = new Date();
   const monthNames = [

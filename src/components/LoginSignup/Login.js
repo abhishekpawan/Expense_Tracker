@@ -23,7 +23,7 @@ const Login = () => {
     notificationPopup,
   } = useContext(expenseData);
 
-  const URL = "http://localhost:5000/api/users/login";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/users/login";
 
   useEffect(() => {
     if (isUserLoggedIn === true) {

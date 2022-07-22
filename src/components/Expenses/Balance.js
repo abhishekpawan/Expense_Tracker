@@ -17,7 +17,7 @@ const Balance = (props) => {
     notificationPopup,
   } = useContext(expenseData);
 
-  const URL = "http://localhost:5000/api/incomes/create";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/incomes/create";
   //convertinng month name to number
   function getMonthFromString(mon) {
     return new Date(Date.parse(mon + " 1, 2022")).getMonth() + 1;

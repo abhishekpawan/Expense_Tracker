@@ -26,7 +26,7 @@ const Register = () => {
     notificationPopup,
   } = useContext(expenseData);
 
-  const URL = "http://localhost:5000/api/users/register";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/users/register";
 
   useEffect(() => {
     if (isUserLoggedIn === true) {
