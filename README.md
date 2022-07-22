@@ -2,9 +2,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="" alt="" width="75%">
 
-  <h3 align="center">Expense Manager (Front-End)</h3>
+
+<img src="https://github.com/abhishekpawan/Expense_Tracker/blob/main/src/assets/2ndtitle.png" alt="expensemanagertitle" width="75%">
+
 
   <p align="center">
     <a href="https://abhishekpawan.me/BookListApp/">Try it!</a> | <a href="https://github.com/abhishekpawan/Expense_Tracker/issues">Report Bug</a>
@@ -20,7 +21,7 @@
 
 <div align="center">
   
-<img src="https://github.com/abhishekpawan/helping-hand/blob/main/src/img/helpinghandmockup.png" alt="helpinghandmockup" width="75%">
+<img src="https://github.com/abhishekpawan/Expense_Tracker/blob/main/src/assets/expensemanagerss.png" alt="expensemanagermockup" width="75%">
 
 </div>
 
