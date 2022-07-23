@@ -172,13 +172,13 @@ const ExpenseItem = (props) => {
       ) : (
         <Spin indicator={antIcon} spinning={isSpinning}>
           <div className="expense-item row">
-            <div className="col-8 expense-title">
+            <div className="col-6 col-lg-8 expense-title">
               <span>{props.title}</span>
               <span className="date">
                 {day} {month} {year}
               </span>
             </div>
-            <div className="col-4">
+            <div className="col-6 col-lg-4">
               <div className="row">
                 <div className="col-12 col-sm-6 expense-amount">
                   ₹ {parseFloat(props.amount).toFixed(2)}

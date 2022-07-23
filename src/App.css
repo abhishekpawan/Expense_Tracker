@@ -448,6 +448,7 @@ section .container .user .formBx form .signup a {
 }
 
 /* ----- CHART ----- */
+
 .chart-and-addExpense {
   margin-bottom: 30px;
 }
@@ -645,9 +646,10 @@ section .container .user .formBx form .signup a {
   }
   .options .balances {
     margin-bottom: 10px;
+    font-size: 12px;
   }
   .options .balances p span.money {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .options .expenses-filter select {
@@ -854,12 +856,26 @@ section .container .user .formBx form .signup a {
     height: 110px;
     align-items: flex-start;
   }
+  .expense-item .expense-title {
+    font-size: 16px;
+  }
+
   .expense-item .expense-title span.date {
     margin-top: 5px;
+    font-size: 10px;
   }
+
+.expense-item .expense-amount {
+  font-size: 16px;
+}
+.expense-item .expense-actions .edit-icon {
+  transform: scale(.8);
+}
 
   .expense-item .expense-actions .delete {
     margin: 0px;
+  transform: scale(.8);
+
   }
 }
 
@@ -872,7 +888,7 @@ form .expense-item {
   justify-content: space-between;
 }
 .expense-item input {
-  width: 200px;
+  width: 150px;
   background: none;
   border: none;
   border-bottom: #ff5e24 1px solid;
@@ -883,7 +899,7 @@ form .expense-item {
 }
 .expense-item .expense-amount input {
   margin-top: 10px;
-  width: 110px;
+  width: 60px;
 }
 
 .expense-item .buttons {
