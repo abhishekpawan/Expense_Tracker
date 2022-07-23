@@ -41,6 +41,8 @@ This is a Expense Manager web application, where you can track and manage you da
 - ReactJS
 - NodeJS
 - MongoDb
+- jsonwebtoken
+- bcryptjs
 - HTML CSS JavaScript
 - Bootstrap
 - antd Design
