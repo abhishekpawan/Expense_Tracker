@@ -6,12 +6,13 @@ import titleImage from "../assets/2ndtitle.png"
 
 const Header = () => {
   const navigate = useNavigate();
-  const { user, setUserLoggedin, popupMsg, notificationPopup } =
+  const { setExpenses,user, setUserLoggedin, popupMsg, notificationPopup } =
     useContext(expenseData);
 
   const logoutHandler = () => {
     localStorage.removeItem("user");
     setUserLoggedin(false);
+    setExpenses([])
     navigate("/login");
 
     //setting notification pop

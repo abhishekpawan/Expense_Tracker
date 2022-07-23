@@ -12,7 +12,6 @@ const Home = () => {
   const {expenses, isUserLoggedIn } = useContext(expenseData);
   const [isSpinning, setSpinning] = useState(true);
   const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
-  console.log(expenses);
   useEffect(() => {
     if (expenses.length > 0 || expenses.msg) {
       setSpinning(false);

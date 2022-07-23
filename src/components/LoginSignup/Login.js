@@ -102,7 +102,6 @@ const Login = () => {
       registerUser();
     }
   };
-  console.log(isSpinning);
 
   return (
     <React.Fragment>

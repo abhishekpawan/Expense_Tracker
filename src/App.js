@@ -86,12 +86,6 @@ const App = () => {
   }, [apiCall, isUserLoggedIn]);
 
   const notificationPopup = (NotificationType) => {
-    // message.open({
-    //   type: "info",
-    //   content: `${popupMsg.current}`,
-    //   duration: 2,
-    // });
-    console.log(NotificationType);
     notification[NotificationType]({
       message: `${popupMsg.current}`,
   });
