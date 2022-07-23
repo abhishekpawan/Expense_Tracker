@@ -362,6 +362,7 @@ section .container .user .formBx form .signup a {
 /* -----HEADER---- */
 
 .main-content {
+  height: 80vh;
   padding-top: 10px;
   margin: 0px 30px 30px 30px;
 }
