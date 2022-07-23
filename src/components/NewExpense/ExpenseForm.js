@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { expenseData } from "../../App";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 
 const ExpenseForm = () => {
@@ -18,6 +20,11 @@ const ExpenseForm = () => {
 
   const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/create";
 
+  const [isSpinning, setSpinning] = useState(false);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
+  );
+
   function convertDate(inputFormat) {
     function pad(s) {
       return s < 10 ? "0" + s : s;
@@ -27,6 +34,8 @@ const ExpenseForm = () => {
   }
 
   const submitHandler = (e) => {
+    setSpinning(true)
+
     e.preventDefault();
 
     const expenseData = {
@@ -50,12 +59,16 @@ const ExpenseForm = () => {
         //setting notification pop
         popupMsg.current = data.error;
         notificationPopup("error");
+        setSpinning(false)
+
       } else {
         setExpenses((prevExpense) => [...prevExpense, data]);
 
         //setting notification pop
         popupMsg.current = "Expense added!";
         notificationPopup("success");
+        setSpinning(false)
+
 
         setApiCall(apiCall + 1);
       }
@@ -77,6 +90,8 @@ const ExpenseForm = () => {
 
   return (
     <React.Fragment>
+            <Spin indicator={antIcon} spinning={isSpinning}>
+
       <div className="modal fade" id="expense-form">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -147,6 +162,7 @@ const ExpenseForm = () => {
       >
         Add Expense
       </button>
+      </Spin>
     </React.Fragment>
   );
 };

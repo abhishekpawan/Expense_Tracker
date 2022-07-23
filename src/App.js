@@ -62,6 +62,9 @@ const App = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+          if(data.msg){
+           return setExpenses([data])
+          }
           setExpenses(data);
           setSpinning(false);
         });

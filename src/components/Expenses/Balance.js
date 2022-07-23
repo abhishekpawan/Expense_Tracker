@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { expenseData } from "../../App";
 import { FaEdit } from "react-icons/fa";
 import { FaCheckSquare } from "react-icons/fa";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const Balance = (props) => {
   const [updatedIncome, setUpdatedIncome] = useState(props.incomes[0]?.income);
@@ -18,12 +20,19 @@ const Balance = (props) => {
   } = useContext(expenseData);
 
   const URL = "https://ink-cottony-licorice.glitch.me/api/incomes/create";
+
+  const [isSpinning, setSpinning] = useState(false);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
+  );
+
   //convertinng month name to number
   function getMonthFromString(mon) {
     return new Date(Date.parse(mon + " 1, 2022")).getMonth() + 1;
   }
 
   const submitIncomeHandler = (e) => {
+    setSpinning(true)
     e.preventDefault();
 
     const enteredIncome = {
@@ -50,6 +59,7 @@ const Balance = (props) => {
           //setting notification pop
           popupMsg.current = data.error;
           notificationPopup("error");
+          setSpinning(false)
         } else {
           const updatedIncomeArray = incomes.filter((income) => {
             return income._id !== data._id;
@@ -58,6 +68,8 @@ const Balance = (props) => {
           updatedIncomeArray.push(data);
           setIncomes(updatedIncomeArray);
           setIncomeEditable(false);
+          setSpinning(false)
+
 
           //setting notification pop
           popupMsg.current = "Income updated!";
@@ -85,6 +97,8 @@ const Balance = (props) => {
 
   return (
     <React.Fragment>
+      <Spin indicator={antIcon} spinning={isSpinning}>
+
       <div className="balances row">
         <div className="col-4">
           <p className="income">
@@ -130,6 +144,7 @@ const Balance = (props) => {
           </p>
         </div>
       </div>
+      </Spin>
     </React.Fragment>
   );
 };

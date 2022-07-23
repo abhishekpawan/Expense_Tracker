@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { expenseData } from "../../App";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { AiFillEye } from "react-icons/ai";
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 import titleImage from "../../assets/2ndtitle.png";
 
 const Register = () => {
@@ -13,7 +15,6 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState();
   let password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
   const [isPasswordValid, setPasswordValid] = useState(false);
-  const [isPasswordMatch, setPasswordMatch] = useState(false);
   const [passwordType, setPasswordType] = useState("hide");
   const [confirmPasswordType, setConfirmPasswordType] = useState("hide");
   let email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -27,6 +28,9 @@ const Register = () => {
   } = useContext(expenseData);
 
   const URL = "https://ink-cottony-licorice.glitch.me/api/users/register";
+
+  const [isSpinning, setSpinning] = useState(false);
+  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
 
   useEffect(() => {
     if (isUserLoggedIn === true) {
@@ -62,6 +66,8 @@ const Register = () => {
       popupMsg.current = "The passwords doesn't match! Please Try Again";
       notificationPopup("error");
     } else {
+      setSpinning(true);
+
       const userData = {
         name: username,
         email: email,
@@ -81,10 +87,14 @@ const Register = () => {
           //setting notification pop
           popupMsg.current = data.error;
           notificationPopup("error");
+          setSpinning(false);
+
         } else {
           localStorage.setItem("user", JSON.stringify(data));
           setUser(data);
           setUserLoggedin(true);
+          setSpinning(false);
+
 
           //setting notification pop
           popupMsg.current = "Registration successfull!";
@@ -99,6 +109,8 @@ const Register = () => {
 
   return (
     <React.Fragment>
+        <Spin indicator={antIcon} spinning={isSpinning}>
+
       <section className="login">
         <div className="titleImage">
           <img src={titleImage} alt="titleImage" />
@@ -173,6 +185,7 @@ const Register = () => {
           </div>
         </div>
       </section>
+      </Spin>
     </React.Fragment>
   );
 };

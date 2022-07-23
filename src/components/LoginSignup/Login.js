@@ -4,6 +4,8 @@ import { expenseData } from "../../App";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { AiFillEye } from "react-icons/ai";
 import titleImage from "../../assets/2ndtitle.png";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import "../../App.css";
 
 const Login = () => {
@@ -25,6 +27,11 @@ const Login = () => {
 
   const URL = "https://ink-cottony-licorice.glitch.me/api/users/login";
 
+  const [isSpinning, setSpinning] = useState(false);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
+  );
+
   useEffect(() => {
     if (isUserLoggedIn === true) {
       navigate("/");
@@ -45,8 +52,10 @@ const Login = () => {
     } else setPasswordValid(false);
   }, [password]);
 
+
   const submitHandler = (e) => {
     e.preventDefault();
+
     if (isEmailValid === false) {
       //setting notification pop
       popupMsg.current = "Please enter a valid email address!";
@@ -56,6 +65,9 @@ const Login = () => {
         "password should be min 6 character with MIX of Uppercase, lowercase, digits!";
       notificationPopup("warning");
     } else {
+    setSpinning(true)
+
+      
       const userData = {
         email: email,
         password: password,
@@ -72,10 +84,13 @@ const Login = () => {
         if (data.error) {
           popupMsg.current = data.error;
           notificationPopup("error");
+          setSpinning(false);
+
         } else {
           localStorage.setItem("user", JSON.stringify(data));
           setUser(data);
           setUserLoggedin(true);
+          setSpinning(false);
 
           //setting notification pop
           popupMsg.current = "Login successfull!";
@@ -85,60 +100,62 @@ const Login = () => {
       }
 
       registerUser();
-      navigate("/");
     }
   };
+  console.log(isSpinning);
 
   return (
     <React.Fragment>
-      <section className="login">
-        <div className="titleImage">
-          <img src={titleImage} alt="titleImage" />
-        </div>
-        <div className="container">
-          <div className="user signinBx">
-            <div className="formBx">
-              <form onSubmit={submitHandler}>
-                <h2>Sign In</h2>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <div className="pd">
+      <Spin indicator={antIcon} spinning={isSpinning}>
+        <section className="login">
+          <div className="titleImage">
+            <img src={titleImage} alt="titleImage" />
+          </div>
+          <div className="container">
+            <div className="user signinBx">
+              <div className="formBx">
+                <form onSubmit={submitHandler}>
+                  <h2>Sign In</h2>
                   <input
-                    type={passwordType === "hide" ? "password" : "text"}
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="email"
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
-                  {passwordType === "hide" ? (
-                    <i onClick={() => setPasswordType("show")}>
-                      <AiFillEyeInvisible />
-                    </i>
-                  ) : (
-                    <i onClick={() => setPasswordType("hide")}>
-                      <AiFillEye />
-                    </i>
-                  )}
-                </div>
-                <div className="bt">
-                  <button className="btn-4" type="submit">
-                    Sign In
-                  </button>
-                </div>
-                <p className="signup">
-                  Don't have an account ?
-                  <a href="#" onClick={() => navigate("/register")}>
-                    Register.
-                  </a>
-                </p>
-              </form>
+                  <div className="pd">
+                    <input
+                      type={passwordType === "hide" ? "password" : "text"}
+                      placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    {passwordType === "hide" ? (
+                      <i onClick={() => setPasswordType("show")}>
+                        <AiFillEyeInvisible />
+                      </i>
+                    ) : (
+                      <i onClick={() => setPasswordType("hide")}>
+                        <AiFillEye />
+                      </i>
+                    )}
+                  </div>
+                  <div className="bt">
+                    <button className="btn-4" type="submit">
+                      Sign In
+                    </button>
+                  </div>
+                  <p className="signup">
+                    Don't have an account ?
+                    <a href="#" onClick={() => navigate("/register")}>
+                      Register.
+                    </a>
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Spin>
     </React.Fragment>
   );
 };
