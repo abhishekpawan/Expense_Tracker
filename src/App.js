@@ -28,7 +28,7 @@ const App = () => {
     }
   }, [isUserLoggedIn]);
 
-  const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/all";
+  const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/all?sortBy=date:desc";
   const INCOME_URL = "https://ink-cottony-licorice.glitch.me/api/incomes/all";
 
   var today = new Date();

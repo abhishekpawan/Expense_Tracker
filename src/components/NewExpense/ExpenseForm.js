@@ -11,7 +11,7 @@ const ExpenseForm = () => {
     apiCall,
     setApiCall,
     popupMsg,
-    notificationPopup,
+    notificationPopup, isSpinning, setSpinning
   } = useContext(expenseData);
   const today = new Date();
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -20,7 +20,7 @@ const ExpenseForm = () => {
 
   const URL = "https://ink-cottony-licorice.glitch.me/api/expenses/create";
 
-  const [isSpinning, setSpinning] = useState(false);
+  // const [isSpinning, setSpinning] = useState(false);
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
   );
@@ -62,7 +62,7 @@ const ExpenseForm = () => {
         setSpinning(false)
 
       } else {
-        setExpenses((prevExpense) => [...prevExpense, data]);
+        setExpenses((prevExpense) => [data,...prevExpense]);
 
         //setting notification pop
         popupMsg.current = "Expense added!";
@@ -90,7 +90,7 @@ const ExpenseForm = () => {
 
   return (
     <React.Fragment>
-            <Spin indicator={antIcon} spinning={isSpinning}>
+            {/* <Spin indicator={antIcon} spinning={isSpinning}> */}
 
       <div className="modal fade" id="expense-form">
         <div className="modal-dialog">
@@ -162,7 +162,7 @@ const ExpenseForm = () => {
       >
         Add Expense
       </button>
-      </Spin>
+      {/* </Spin> */}
     </React.Fragment>
   );
 };

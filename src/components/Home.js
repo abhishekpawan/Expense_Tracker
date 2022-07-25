@@ -9,8 +9,8 @@ import Footer from "./Footer";
 
 const Home = () => {
   const navigate = useNavigate();
-  const {expenses, isUserLoggedIn } = useContext(expenseData);
-  const [isSpinning, setSpinning] = useState(true);
+  const {expenses, isUserLoggedIn,isSpinning, setSpinning } = useContext(expenseData);
+  // const [isSpinning, setSpinning] = useState(true);
   const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "#ff4400" }} spin />
   useEffect(() => {
     if (expenses.length > 0 || expenses.msg) {
