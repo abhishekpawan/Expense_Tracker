@@ -8,7 +8,7 @@
 
 
   <p align="center">
-    <a href="https://abhishekpawan.me/BookListApp/">Try it!</a> | <a href="https://github.com/abhishekpawan/Expense_Tracker/issues">Report Bug</a>
+    <a href="https://expanse-manager-abhi.netlify.app/">Try it!</a> | <a href="https://github.com/abhishekpawan/Expense_Tracker/issues">Report Bug</a>
   </p>
 </div>
 
